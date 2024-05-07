@@ -47,7 +47,7 @@ class LineItemControllerTest {
     @DisplayName("GET /cart/line-items - 장바구니에 상품이 있을 때")
     void testListWithLineItems() throws Exception {
         // TODO: 장바구니에 상품을 담아 둡니다.
-        given(lineItemService.getAllLineItems()).willReturn(List.of(new LineItem("product-1", "Product 1", 1000, 2, 2000)));
+        given(lineItemService.getAllLineItems()).willReturn(List.of(new LineItem("product-1", "Product 1", 1000, 2)));
 
         mockMvc.perform(get("/cart/line-items"))
                 .andExpect(status().isOk())

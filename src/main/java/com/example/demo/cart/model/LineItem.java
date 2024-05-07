@@ -25,11 +25,18 @@ public class LineItem {
     // 기본 생성자 및 모든 필드를 포함한 생성자
     public LineItem() {}
 
-    public LineItem(String productId, String productName, int unitPrice, int quantity, int totalPrice) {
+    public LineItem(String productId, String productName, int unitPrice, int quantity) {
         this.productId = productId;
         this.productName = productName;
         this.unitPrice = unitPrice;
         this.quantity = quantity;
-        this.totalPrice = totalPrice;
+        this.totalPrice = this.unitPrice * this.quantity;
+    }
+
+    // 비즈니스 메소드
+    public void addQuantity(int quantityToAdd) {
+        if (quantityToAdd <= 0) return;
+        this.quantity += quantityToAdd;
+        this.totalPrice = this.unitPrice * this.quantity;
     }
 }
