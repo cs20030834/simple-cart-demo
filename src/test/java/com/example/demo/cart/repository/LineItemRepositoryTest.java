@@ -26,7 +26,7 @@ class LineItemRepositoryTest {
     @Test
     public void whenFindByProductId_thenReturnLineItem() {
         // given
-        LineItem newItem = new LineItem("product-1", "Product One", 1000, 2, 2000);
+        LineItem newItem = new LineItem("product-1", "Product One", 1000, 2);
         entityManager.persist(newItem);
         entityManager.flush();
 

@@ -36,7 +36,7 @@ class LineItemServiceTest {
 
     @Test
     void testAddItem() {
-        LineItem item = new LineItem("product-1", "Product 1", 100, 2, 200);
+        LineItem item = new LineItem("product-1", "Product 1", 100, 2);
         when(lineItemRepository.save(any(LineItem.class))).thenReturn(item);
 
         LineItem savedItem = lineItemService.addItem(item);
@@ -50,8 +50,8 @@ class LineItemServiceTest {
 
     @Test
     void testGetAllLineItems() {
-        LineItem item1 = new LineItem("product-1", "Product 1", 100, 2, 200);
-        LineItem item2 = new LineItem("product-2", "Product 2", 150, 3, 450);
+        LineItem item1 = new LineItem("product-1", "Product 1", 100, 2);
+        LineItem item2 = new LineItem("product-2", "Product 2", 150, 3);
         when(lineItemRepository.findAll()).thenReturn(Arrays.asList(item1, item2));
 
         List<LineItem> items = lineItemService.getAllLineItems();
@@ -66,7 +66,7 @@ class LineItemServiceTest {
     void testAddOrUpdateItem_NewItem() {
         CartDto.LineItemDto dto = new CartDto.LineItemDto(1L, "product-1", "Product 1", 100, 2, 200);
         when(lineItemRepository.findByProductId("product-1")).thenReturn(Optional.empty());
-        when(lineItemRepository.save(any(LineItem.class))).thenReturn(new LineItem("product-1", "Product 1", 100, 2, 200));
+        when(lineItemRepository.save(any(LineItem.class))).thenReturn(new LineItem("product-1", "Product 1", 100, 2));
 
         lineItemService.addOrUpdateItem(dto);
 
@@ -76,7 +76,7 @@ class LineItemServiceTest {
     @Test
     void testAddOrUpdateItem_UpdateItem() {
         // TODO: 장바구니에 상품을 1개 담아둡니다.
-        LineItem existingItem = new LineItem("product-1", "Product 1", 100, 1, 100);
+        LineItem existingItem = new LineItem("product-1", "Product 1", 100, 1);
         when(lineItemRepository.findByProductId("product-1")).thenReturn(Optional.of(existingItem));
 
         when(lineItemRepository.save(any(LineItem.class))).thenReturn(existingItem);

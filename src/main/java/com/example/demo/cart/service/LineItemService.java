@@ -18,6 +18,7 @@ public class LineItemService {
     public LineItemService(LineItemRepository lineItemRepository) {
         this.lineItemRepository = lineItemRepository;
     }
+
     public LineItem addItem(LineItem item) {
         return lineItemRepository.save(item);
     }
@@ -32,16 +33,14 @@ public class LineItemService {
 
         if (existingItem.isPresent()) {
             LineItem item = existingItem.get();
-            item.setQuantity(item.getQuantity() + lineItemDto.quantity());
-            item.setTotalPrice(item.getUnitPrice() * item.getQuantity());
+            item.addQuantity(lineItemDto.quantity());
             lineItemRepository.save(item);
         } else {
             LineItem newItem = new LineItem(
                     lineItemDto.productId(),
                     lineItemDto.productName(),
                     lineItemDto.unitPrice(),
-                    lineItemDto.quantity(),
-                    lineItemDto.unitPrice() * lineItemDto.quantity()
+                    lineItemDto.quantity()
             );
             lineItemRepository.save(newItem);
         }
