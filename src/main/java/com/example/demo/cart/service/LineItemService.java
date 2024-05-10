@@ -33,7 +33,7 @@ public class LineItemService {
 
         if (existingItem.isPresent()) {
             LineItem item = existingItem.get();
-            item.addQuantity(item.getQuantity());
+            item.addQuantity(lineItemDto.quantity());
             lineItemRepository.save(item);
         } else {
             LineItem newItem = new LineItem(
